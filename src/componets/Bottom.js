@@ -1,13 +1,31 @@
 import styled from "styled-components"
 
 
-export default function Bottom() {
+export default function Bottom(props) {
+    const {questionsList,setQuestionsList,cardOpen,setCardOpen} = props
+    function semNome(qualquer){
+        if(cardOpen.openCard){
+            questionsList.forEach((element, index)=> {
+                if(element.id === cardOpen.card.id){
+                    const newQuestions = [...questionsList]
+                    const newCard = {...cardOpen.card}
+                    newCard.colorQ = qualquer
+                    newCard.answerQ = true
+                    newCard.changeStyle = true
+                    newQuestions[index] = newCard
+                    setQuestionsList(newQuestions)
+                    setCardOpen({openCard:false,card:''})
+                }
+            });
+        }
+    }
+
     return (
         <Footer>
             <div>
-                <Buttons colors={'#FF3030'}>Nao lembrei</Buttons>
-                <Buttons colors={'#FF922E'}>Quase nao lembrei</Buttons>
-                <Buttons colors={'#2FBE34'}>Zap!</Buttons>
+                <Buttons colors={'#FF3030'} onClick ={()=>semNome('#FF3030')}>Nao lembrei</Buttons>
+                <Buttons colors={'#FF922E'} onClick ={()=>semNome('#FF922E')}>Quase nao lembrei</Buttons>
+                <Buttons colors={'#2FBE34'} onClick ={()=>semNome('#2FBE34')}>Zap!</Buttons>
             </div>
             <p>1/4 CONCLUÍDOS</p>
         </Footer>
