@@ -2,11 +2,20 @@ import styled from "styled-components"
 import Question from "./Question"
 
 export default function Questions(props) {
-    const {questionsList, setQuestionsList ,cardOpen,setCardOpen} = props
-    console.log(questionsList)
+    const { questionsList, setQuestionsList, cardOpen, setCardOpen, icon, changeText, setChangeText } = props
+
     return (
         <Content>
-            {questionsList.map((element) => <Question key={element.id} card={element} questionsList = {questionsList} setQuestionsList={setQuestionsList} cardOpen={cardOpen} setCardOpen={setCardOpen}></Question>)}
+            {questionsList.map((element) => <Question key={element.id} 
+            card={element} 
+            questionsList={questionsList} 
+            setQuestionsList={setQuestionsList} 
+            cardOpen={cardOpen} 
+            setCardOpen={setCardOpen} 
+            icon={icon} 
+            changeText={changeText}
+            setChangeText={setChangeText}>
+            </Question>)}
         </Content>
     )
 }

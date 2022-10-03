@@ -1,19 +1,22 @@
 import { useState } from "react"
 import styled from "styled-components"
 import play from "../img/seta_play.png"
+import right from "../img/icone_certo.png"
+import wrong from "../img/icone_erro.png"
+import almost from "../img/icone_quase.png"
 import turn from "../img/seta_virar.png"
 
 export default function Question(props) {
-    const { card, cardOpen, setCardOpen, questionsList , setQuestionsList } = props
-    //changeStyled tem que passar como props para disabilitar o botao e trocar o icone para o Bottom ver ele tambem 
-    //se um cartao estiver como true o outro nao pode abrir
+    const { card, cardOpen, setCardOpen, questionsList , setQuestionsList, changeText, setChangeText} = props
     
-    const [changeText, setChangeText] = useState(false)
+    
+    
 
     const { question, response, answerQ} = card
     const title = `Pergunta ${card.id}`
+
     function openQuestion() {
-        console.log(cardOpen)
+        
         if (!cardOpen.openCard && !answerQ) {
             // setChangeStyled(false)
             const newList = [...questionsList]
@@ -28,17 +31,28 @@ export default function Question(props) {
             setCardOpen(newObj)
         }
     }
-
+    function changeIcon(color) {
+        if (color === "#2FBE34") {
+            return right
+        } else if (color === "#FF922E") {
+            return almost
+        } else if (color === "#FF3030") {
+            return wrong
+        }else{
+            return play
+        }
+    }
+    
     return (
         (card.changeStyle) ?
             <ClosedQuestion coloredText = {card.colorQ} marked = {answerQ}>
                 <p>{title}</p>
-                <img onClick={()=>openQuestion()}  src={play} />
+                <img onClick={()=>openQuestion()}  src={changeIcon(card.colorQ)} alt = "Icone da pergunta"/>
             </ClosedQuestion>
             :
             <OpenQuestion>
-                <p>{(changeText) ? response : question}</p>
-                <img onClick={() => setChangeText(true)} src={(changeText) ? "" : turn} />
+                <p>{(changeText) ? question : response}</p>
+                {changeText && (<img onClick={() => setChangeText(false)} src={turn} alt = "Icone da pergunta"/>)}
             </OpenQuestion>
     )
 }

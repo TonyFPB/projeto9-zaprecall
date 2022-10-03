@@ -1,10 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components"
 
 
 export default function Bottom(props) {
-    const {questionsList,setQuestionsList,cardOpen,setCardOpen} = props
+    const {questionsList,setQuestionsList,cardOpen,setCardOpen, changeText, setChangeText} = props
+    const [numbers, setNumbers] = useState(0)
+    
     function semNome(qualquer){
-        if(cardOpen.openCard){
+        if(cardOpen.openCard && !changeText){
             questionsList.forEach((element, index)=> {
                 if(element.id === cardOpen.card.id){
                     const newQuestions = [...questionsList]
@@ -13,6 +16,8 @@ export default function Bottom(props) {
                     newCard.answerQ = true
                     newCard.changeStyle = true
                     newQuestions[index] = newCard
+                    setNumbers(numbers+1)
+                    setChangeText(true)
                     setQuestionsList(newQuestions)
                     setCardOpen({openCard:false,card:''})
                 }
@@ -27,7 +32,7 @@ export default function Bottom(props) {
                 <Buttons colors={'#FF922E'} onClick ={()=>semNome('#FF922E')}>Quase nao lembrei</Buttons>
                 <Buttons colors={'#2FBE34'} onClick ={()=>semNome('#2FBE34')}>Zap!</Buttons>
             </div>
-            <p>1/4 CONCLUÍDOS</p>
+            <p>{numbers}/8 CONCLUÍDOS</p>
         </Footer>
     )
 }

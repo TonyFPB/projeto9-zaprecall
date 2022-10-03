@@ -1,4 +1,4 @@
-const zapQuestions = [
+const ZAPQUESTIONS = [
     {
         id: 1,
         question: 'O que é JSX?',
@@ -63,4 +63,4 @@ const zapQuestions = [
         changeStyle: true
     }
 ]
-export default zapQuestions
+export default ZAPQUESTIONS
