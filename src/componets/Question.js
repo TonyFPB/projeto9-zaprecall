@@ -7,23 +7,23 @@ import almost from "../img/icone_quase.png"
 import turn from "../img/seta_virar.png"
 
 export default function Question(props) {
-    const { card, cardOpen, setCardOpen, questionsList , setQuestionsList, changeText, setChangeText} = props
-    
-    
-    
+    const { card, cardOpen, setCardOpen, questionsList, setQuestionsList, changeText, setChangeText } = props
 
-    const { question, response, answerQ} = card
+
+
+
+    const { question, response, answerQ } = card
     const title = `Pergunta ${card.id}`
 
     function openQuestion() {
-        
+
         if (!cardOpen.openCard && !answerQ) {
             // setChangeStyled(false)
             const newList = [...questionsList]
-            const newElement = {...card}
+            const newElement = { ...card }
             newElement.changeStyle = false
-            newList[newElement.id-1] = newElement
-            const newObj = {...cardOpen}
+            newList[newElement.id - 1] = newElement
+            const newObj = { ...cardOpen }
             newObj.openCard = true
             newObj.card = card
             newObj.changeStyle = false
@@ -38,21 +38,21 @@ export default function Question(props) {
             return almost
         } else if (color === "#FF3030") {
             return wrong
-        }else{
+        } else {
             return play
         }
     }
     
     return (
         (card.changeStyle) ?
-            <ClosedQuestion coloredText = {card.colorQ} marked = {answerQ}>
-                <p>{title}</p>
-                <img onClick={()=>openQuestion()}  src={changeIcon(card.colorQ)} alt = "Icone da pergunta"/>
+            <ClosedQuestion data-identifier="flashcard" coloredText={card.colorQ} marked={answerQ}>
+                <p data-identifier="flashcard-index-item">{title}</p>
+                <img data-identifier={answerQ ? 'flashcard-status' : 'flashcard-show-btn'} onClick={() => openQuestion()} src={changeIcon(card.colorQ)} alt="Icone da pergunta" />
             </ClosedQuestion>
             :
-            <OpenQuestion>
-                <p>{(changeText) ? question : response}</p>
-                {changeText && (<img onClick={() => setChangeText(false)} src={turn} alt = "Icone da pergunta"/>)}
+            <OpenQuestion data-identifier="flashcard">
+                <p data-identifier={(changeText) ? "flashcard-question" : "flashcard-answer"}>{(changeText) ? question : response}</p>
+                {changeText && (<img data-identifier="flashcard-turn-btn" onClick={() => setChangeText(false)} src={turn} alt="Icone da pergunta" />)}
             </OpenQuestion>
     )
 }
@@ -76,7 +76,7 @@ const ClosedQuestion = styled.li`
         font-size: 16px;
         line-height: 19px;
         color: ${props => props.coloredText};
-        text-decoration:${props => (props.marked)?"line-through":"none"};
+        text-decoration:${props => (props.marked) ? "line-through" : "none"};
     }
 `
 const OpenQuestion = styled.li`

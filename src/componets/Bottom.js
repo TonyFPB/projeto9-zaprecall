@@ -28,9 +28,9 @@ export default function Bottom(props) {
     return (
         <Footer>
             <div>
-                <Buttons colors={'#FF3030'} onClick ={()=>semNome('#FF3030')}>Nao lembrei</Buttons>
-                <Buttons colors={'#FF922E'} onClick ={()=>semNome('#FF922E')}>Quase nao lembrei</Buttons>
-                <Buttons colors={'#2FBE34'} onClick ={()=>semNome('#2FBE34')}>Zap!</Buttons>
+                <Buttons data-identifier="forgot-btn" colors={'#FF3030'} onClick ={()=>semNome('#FF3030')}>Nao lembrei</Buttons>
+                <Buttons data-identifier="almost-forgot-btn" colors={'#FF922E'} onClick ={()=>semNome('#FF922E')}>Quase nao lembrei</Buttons>
+                <Buttons data-identifier="zap-btn" colors={'#2FBE34'} onClick ={()=>semNome('#2FBE34')}>Zap!</Buttons>
             </div>
             <p>{numbers}/8 CONCLUÍDOS</p>
         </Footer>
