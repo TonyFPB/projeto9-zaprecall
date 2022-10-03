@@ -32,7 +32,7 @@ export default function Bottom(props) {
                 <Buttons data-identifier="almost-forgot-btn" colors={'#FF922E'} onClick ={()=>semNome('#FF922E')}>Quase nao lembrei</Buttons>
                 <Buttons data-identifier="zap-btn" colors={'#2FBE34'} onClick ={()=>semNome('#2FBE34')}>Zap!</Buttons>
             </div>
-            <p>{numbers}/8 CONCLUÍDOS</p>
+            <p data-identifier="flashcard-counter">{numbers}/8 CONCLUÍDOS</p>
         </Footer>
     )
 }
